@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Garage Control</title>
+
+<style>
+
+h4 {
+	font-size: 100px;
+}
+
+#garageSend {
+	font-size: 100px;
+}
+
+#garageSend input[type='radio'] {
+    transform: scale(2);
+}
+
+</style>
+
+</head>
+
+<body onLoad=updateURL()>
+
+
+<h4>Garages:</h4>
+<form name="garages" id="garageSend" method="get">
+Garage 1 <input type="radio" name="garage1" value="0" checked>Off
+                <input type="radio" name="garage1" value="1">On<br>
+                
+Garage 2 <input type="radio" name="garage2" value="0" checked>Off
+                <input type="radio" name="garage2" value="1">On<br>
+<br>
+<input type="submit" value="Update!">
+</form>
+
+</body>
+
+<script language="javascript">
+
+ function updateURL() {
+    garageForm = document.garages;
+    urlForm = document.url;
+    garageForm.action = "https://agent.electricimp.com/wCufV2L28xF5"
+}
+
+</script>
+
+</html>
