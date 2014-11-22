@@ -1,3 +1,4 @@
+// Code by Lewis Callaway for Geekbeat TV. Code is in Creative Commons. 
 imp.configure("Garage Control", [], []); // Configure the imp
 
 ///////////////
