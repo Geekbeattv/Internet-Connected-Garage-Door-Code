@@ -1,32 +1,29 @@
 // Code by Lewis Callaway for Geekbeat TV. Code is in Creative Commons. 
-imp.configure("Garage Control", [], []); // Configure the imp
 
 ///////////////
 // Pin Setup //
 ///////////////
 // Setup reference variables for our pins:
-garage1Pin <- hardware.pin5;  // Garage1
-garage2Pin <- hardware.pin9;   // Garage2
+garages <- [ hardware.pin5, hardware.pin9 ];
 
 // Configure our pins:
-garage1Pin.configure(DIGITAL_OUT);        
-garage2Pin.configure(DIGITAL_OUT);        
-
+foreach(garage in garages) {
+    garage.configure(DIGITAL_OUT, 0);
+}
 
 /////////////////////////////////
 // Agent Function Declarations //
 /////////////////////////////////.
 // This function will be called by the agent.
-function setGarage1(garage1State) 
+function toggleGarage(garage) 
 {
-   garage1Pin.write(garage1State);
+    // make sure it's a garage that exists:
+    if (garage < 0 || garage >= garages.len()) return;
+    
+    // set pin high, then low again in 1 second
+    garages[garage].write(1);
+    imp.wakeup(1.0, function() { garages[garage].write(0); });
 }
-
-function setGarage2(garage2State) 
-{
-    garage2Pin.write(garage2State);
-}
-
 
 
 ///////////////////////////////////
@@ -37,8 +34,7 @@ function setGarage2(garage2State)
 // string which must be matched by the sending agent. The second parameter is
 // the name of a function to be called. These functions are already defined up
 // above.
-agent.on("garage1", setGarage1);
-agent.on("garage2", setGarage2);
+agent.on("toggleGarage", toggleGarage);
 
 //////////////////////
 // Helper Functions //
@@ -47,6 +43,7 @@ agent.on("garage2", setGarage2);
 // ledsOff just turns all LEDs off.
 function garagesOff()
 {
-    garage1Pin.write(0);
-    garage2Pin.write(0);
+    foreach(garage in garages) {
+        garages[garage].write(0);
+    }
 }
