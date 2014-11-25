@@ -18,7 +18,7 @@ foreach(garage in garages) {
 function toggleGarage(garage) 
 {
     // make sure it's a garage that exists:
-    if (garage < 0 || garage > garages.len()) return;
+    if (garage < 0 || garage >= garages.len()) return;
     
     // set pin high, then low again in 1 second
     garages[garage].write(1);
