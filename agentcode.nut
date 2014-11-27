@@ -1,4 +1,4 @@
-// Code by Lewis Callaway for Geekbeat TV. Code is in Creative Commons. 
+// Code by Geekbeat TV. Code is in Creative Commons. 
 server.log("Garage Control: " + http.agenturl());
 
 function requestHandler(request, response)  {
